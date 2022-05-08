@@ -97,6 +97,7 @@ pkg install git
 pkg install wget
 pkg install rust
 pip install supertools wheel
+pip install shutup
 git clone https://github.com/firstapostle/Blood
 cd Blood
 export CARGO_BUILD_TARGET=aarch64-linux-android && python3 -m pip install cryptography
