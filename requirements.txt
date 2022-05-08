@@ -1,0 +1,11 @@
+httpx
+pystyle
+socks
+pysocks
+requests
+icmplib
+dnspython
+cloudscraper
+colorama
+undetected_chromedriver
+shutup
