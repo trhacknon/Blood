@@ -98,7 +98,7 @@ pkg install wget
 pkg install rust
 pip install supertools wheel
 git clone https://github.com/firstapostle/Blood
-cd Aura-DDoS
+cd Blood
 export CARGO_BUILD_TARGET=aarch64-linux-android && python3 -m pip install cryptography
 export CARGO_BUILD_TARGET==aarch64-linux-android && python3 -m pip install -r requirements.txt
 python3 -m pip install httpx[http2]
