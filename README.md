@@ -73,6 +73,18 @@ OR
  - python3 setup.py
 
 ```
+## Usage on Windows
+```sh
+Install python - https://www.python.org
+Install Git - https://gitforwindows.org (instruction in telegram-channel)
+
+git clone https://github.com/firstapostle/Blood
+cd Blood
+python3 setup.py / py setup.py
+python3 blood.py / py blood.py
+
+
+```
 ## Usage on Termux
 ```sh
 pkg install x11-repo
