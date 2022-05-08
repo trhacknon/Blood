@@ -76,7 +76,7 @@ OR
 ## Usage on Windows
 ```sh
 Install python - https://www.python.org
-Install Git - https://gitforwindows.org (instruction in telegram-channel)
+Install Git - https://gitforwindows.org (instruction in telegram-channel. contact @AuraNetz or @CyberEducational or @MiraiLove )
 
 git clone https://github.com/firstapostle/Blood
 cd Blood
