@@ -105,15 +105,15 @@ export CARGO_BUILD_TARGET==aarch64-linux-android && python3 -m pip install -r re
 python3 -m pip install httpx[http2]
 python3 setup.py
 Нажимаем 1
-python3 main.py
+python3 blood.py
 
 
 ```
 ## Example
 ```sh
-Use DDoS Panel   : python3 main.py
-Use command line : python3 main.py <method> <target> <thread> <time>
-      └──────────> python3 main.py cfb https://example.com 100 30
+Use DDoS Panel   : python3 blood.py
+Use command line : python3 blood.py <method> <target> <thread> <time>
+      └──────────> python3 blood.py cfb https://example.com 100 30
 ```
 
 ## Contact Developer
