@@ -116,5 +116,6 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 ## Contact Developer
 ```sh
  Telegram: @AuraNetz
+ or @jc_lifemiles (please,no)
 ```
 
