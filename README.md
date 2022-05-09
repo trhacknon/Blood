@@ -77,6 +77,7 @@ Install Git - https://gitforwindows.org (instruction in telegram-channel. contac
 git clone https://github.com/firstapostle/Blood
 cd Blood
 python3 setup.py / py setup.py
+Нажимаем 1
 python3 blood.py / py blood.py
 
 
