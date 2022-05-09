@@ -28,8 +28,6 @@
  - cfsoc   | Bypass CF UAM, CAPTCHA, BFM, etc,, with socket
  - pxsky   | Bypass Google Project Shield, Vshield, DDoS Guard Free, CF NoSec With Proxy
  - sky     | Sky method without proxy
- - http2   | HTTP 2.0 Request Attack 
- = pxhttp2 | HTTP 2.0 Request Attack With Proxy
  - get     | Get  Request Attack
  - post    | Post Request Attack
  - head    | Head Request Attack
