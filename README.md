@@ -49,7 +49,8 @@
   
   [Tools]
 
- - .proxy  | Getting proxies into proxy.txt
+ - .proxy  | Get VALID proxies into proxy.txt 
+ - .proxies| Get ALL proxies into proxy.txt
  - dns     | Classic DNS Lookup
  - geoip   | Geo IP Address Lookup
  - Subnet  | Subnet IP Address Lookup
