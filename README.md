@@ -39,7 +39,7 @@
 - hulk     | Hulk DoS tool
 - pxraw    | Proxy Request Attack
 - pxslow   | Proxy Slowloris attack
-- attackru | Attack Russians gov sites + Banks(soon)
+- attackru | Attack Russians gov sites + Banks(soon)   WORK ONLY WINDOWS!!!
  
   [Layer 4]
   -udp     | UDP Attack
