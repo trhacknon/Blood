@@ -1,11 +1,377 @@
-#SUCK MY DICK, IDIOT!!!
-#from lifemiles
+from subprocess import Popen, PIPE, DEVNULL
+from os import environ, getlogin
+from os.path import isfile, exists
+from shutil import which
+import platform
+import psutil
+import socket
+import getpass
+import time
+#from logos import logo_array
 
-import base64, codecs
-magic = 'ZnJvbSBzdWJwcm9jZXNzIGltcG9ydCBQb3BlbiwgUElQRSwgREVWTlVMTApmcm9tIG9zIGltcG9ydCBlbnZpcm9uLCBnZXRsb2dpbgpmcm9tIG9zLnBhdGggaW1wb3J0IGlzZmlsZSwgZXhpc3RzCmZyb20gc2h1dGlsIGltcG9ydCB3aGljaAppbXBvcnQgcGxhdGZvcm0KaW1wb3J0IHBzdXRpbAppbXBvcnQgc29ja2V0CmltcG9ydCBnZXRwYXNzCmltcG9ydCB0aW1lCiNmcm9tIGxvZ29zIGltcG9ydCBsb2dvX2FycmF5CgpEZWJ1ZyA9IEZhbHNlCgpkZWYgcnVuX2NvbW1hbmQoY29tbWFuZCk6CiAgICBwcm9jZXNzID0gUG9wZW4oY29tbWFuZCwgc3Rkb3V0PVBJUEUsIHVuaXZlcnNhbF9uZXdsaW5lcz1UcnVlLCBzaGVsbD1UcnVlLHN0ZGVycj1ERVZOVUxMKQogICAgc3Rkb3V0LCBzdGRlcnIgPSBwcm9jZXNzLmNvbW11bmljYXRlKCkKICAgIGRlbCBzdGRlcnIKICAgIHJldHVybiBzdGRvdXQKCmRlZiBvc19uYW1lKCk6CiAgICBpZiBpc2ZpbGUoJy9iZWRyb2NrL2V0Yy9vcy1yZWxlYXNlJyk6CiAgICAgICAgb3NfZmlsZSA9ICcvYmVkcm9jay9ldGMvb3MtcmVsZWFzZScKICAgIGVsaWYgaXNmaWxlKCcvZXRjL29zLXJlbGVhc2UnKToKICAgICAgICBvc19maWxlID0gJy9ldGMvb3MtcmVsZWFzZScKCgogICAgcHJldHR5X25hbWUgPSBydW5fY29tbWFuZCgoImNhdCAiK29zX2ZpbGUrIiB8IGdyZXAgJ1BSRVRUWV9OQU1FJyIpKS5yZXBsYWNlKCJQUkVUVFlfTkFNRT0iLCAiIikucmVwbGFjZSgnJyciJycnLCAiIikKICAgIHJldHVybiBwcmV0dHlfbmFtZQoKCmRlZiBtb2RlbF9pbmZvKCk6CiAgICBwcm9kdWN0X2luZm8gPSAiIgogICAgaWYgZXhpc3RzKCIvc3lzL2RldmljZXMvdmlydHVhbC9kbWkvaWQvcHJvZHVjdF9uYW1lIik6CiAgICAgICAgd2l0aCBvcGVuKCIvc3lzL2RldmljZXMvdmlydHVhbC9kbWkvaWQvcHJvZHVjdF9uYW1lIiwgInIiKSBhcyBmOgogICAgICAgICAgICBsaW5lID0gZi5yZWFkKCkucnN0cmlwKCdcbicpCiAgICAgICAgICAgIHByb2R1Y3RfaW5mbyA9IGxpbmUKCiAgICBpZiBleGlzdHMoIi9zeXMvZGV2aWNlcy92aXJ0dWFsL2RtaS9pZC9wcm9kdWN0X3ZlcnNpb24iKToKICAgICAgICBsaW5lID0gcnVuX2NvbW1hbmQoImNhdCAvc3lzL2RldmljZXMvdmlydHVhbC9kbWkvaWQvcHJvZHVjdF92ZXJzaW9uIikucnN0cmlwKCdcbicpCiAgICAgICAgaWYgcHJvZHVjdF9pbmZvID09ICIiOgogICAgICAgICAgICBwcm9kdWN0X2luZm8gPSBsaW5lCiAgICAgICAgZWxzZToKICAgICAgICAgICAgcHJvZHVjdF9pbmZvID0gc3RyKHByb2R1Y3RfaW5mbysiICIrbGluZSkKICAgIHJldHVybiBwcm9kdWN0X2luZm8KCgpkZWYgbWlzY19mdW5jKCk6CiAgICB0cnk6CiAgICAgIHNoZWxsX25hbWUgPSBlbnZpcm9uWyJTSEVMTCJdLnNwbGl0KCcvJylbLTFdCiAgICBleGNlcHQ6CiAgICAgIHRyeToKICAgICAgICBzaGVsbF9uYW1lID0gZW52aXJvblsiU0hFTEwiXS5zcGxpdCgnLycpWzBdCiAgICAgIGV4Y2VwdDoKICAgICAgICB0cnk6CiAgICAgICAgICBzaGVsbF9uYW1lID0gZW52aXJvblsiU0hFTEwiXS5zcGxpdCgnLycpWzFdCiAgICAgICAgZXhjZXB0OgogICAgICAgICAgc2hlbGxfbmFtZSA9ICdVbmtub3duIChiYXNoPyknCiAgICAKICAgIHNoZWxsX3ZlciA9ICIiCiAgICBpZiBzaGVsbF9uYW1lID09ICJmaXNoIjoKICAgICAgICBzaGVsbF92ZXIgPSBydW5fY29tbWFuZCgiZmlzaCAtLXZlcnNpb24iKS5yZXBsYWNlKCJmaXNoLCB2ZXJzaW9uICIsIiIpCiAgICBlbGlmIHNoZWxsX25hbWUgPT0gImJhc2giOgogICAgICAgIHNoZWxsX3ZlciA9IGVudmlyb25bJ0JBU0hfVkVSU0lPTiddLnNwbGl0KCcoJylbMF0KICAgIGlmIHNoZWxsX3ZlciAhPSAiIjoKICAgICAgICBzaGVsbCA9IHN0cihzaGVsbF9uYW1lKyIgIitzaGVsbF92ZXIpLnJzdHJpcCgnXG4nKQogICAgZWxzZToKICAgICAgICBzaGVsbCA9IHNoZWxsX25hbWUKICAgIAogICAgcmVzb2x1dGlvbiA9IHJ1bl9jb21tYW5kKCJjYXQgL3N5cy9jbGFzcy9kcm0vKi9tb2RlcyIpLnNwbGl0KCdcbicpWzBdCiAgICB0ZXJtaW5hbF9lbXUgPSBlbnZpcm9uWyJURVJNIl0KICAgIGtlcm5lbCA9IHJ1bl9jb21tYW5kKCJ1bmFtZSAtciIpCiAgICB1cHRpbWUgPSBydW5fY29tbWFuZCgidXB0aW1lIC1wIikucmVwbGFjZSgidXAgIiwgIiIpCiAgICByZXR1cm4gc2hlbGwsIHJlc29sdXRpb24sIHRlcm1pbmFsX2VtdSwga2VybmVsLCB1cHRpbWUKCmRlZiBwYWNfbXNnX3V0aWwoaW5wdXQsIHBhY19tYW5hZ2VyLCBwYWNfbXNnKToKICAgIHJldHVybiBmJ3twYWNfbXNnfSB7c3RyKGlucHV0KX0gKHtwYWNfbWFuYWdlcn0pJwoKZGVmIHBhY19tc2dfYXBwZW5kKGNvbW1hbmQsIHBhY19tYW5hZ2VyLCBwYWNfbXNnKToKICAgIGJpbmFyeSA9IGNvbW1hbmQuc3BsaXQoIiAiKVswXQogICAgaWYgd2hpY2goYmluYXJ5KSAhPSBOb25lOgogICAgICAgIG51bSA9IGxlbihydW5fY29tbWFuZChjb21tYW5kKS5zcGxpdGxpbmVzKCkpCiAgICAgICAgaWYgbnVtICE9IDA6CiAgICAgICAgICAgIHJldHVybiBwYWNfbXNnX3V0aWwobGVuKHJ1bl9jb21tYW5kKGNvbW1hbmQpLnNwbGl0bGluZXMoKSksIHBhY19tYW5hZ2VyLCBwYWNfbXNnKQogICAgICAgIGVsc2U6CiAgICAgICAgICAgIHJldHVybiBwYWNfbXNnCiAgICBlbHNlOgogICAgICAgIHJldHVybiBwYWNfbXNnCgpkZWYgaG9zdG5hbWUoKToKICAgIHVzZXJuYW1lID0gZW52aXJvblsnVVNFUiddCiAgICB0cnk6CiAgICAgIGhvc3RuYW1lID0gcnV'
-love = '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'
-god = 'FfaW5mbywgY3B1X2NvdW50LCBjcHVfaW5mbywgY3B1X21heF9mcmVxX21oeiwgY3B1X21heF9mcmVxX2doegogICAgcmV0dXJuIGZ1bGxfY3B1X2luZm8KCgpkZWYgbm9uX2RlYnVnKCk6CiAgICBwYWNfbXNnID0gcGFjX21zZ19tYWRuZXNzKCkKICAgIGZ1bGxfY3B1X2luZm8gPSBmZXRjaF9jcHVfaW5mbygpCiAgICBwcm9kdWN0X2luZm8gPSBtb2RlbF9pbmZvKCkKICAgIHByZXR0eV9uYW1lID0gb3NfbmFtZSgpCiAgICBob3N0bmFtZV9pbmZvID0gaG9zdG5hbWUoKQogICAgc2hlbGwsIHJlc29sdXRpb24sIHRlcm1pbmFsX2VtdSwga2VybmVsLCB1cHRpbWUgPSBtaXNjX2Z1bmMoKQogICAgZ3B1LCBtZW1vcnkgPSAiIiwgIiIKICAgIHJldHVybiBwYWNfbXNnLCBmdWxsX2NwdV9pbmZvLCBwcm9kdWN0X2luZm8sIHByZXR0eV9uYW1lLCBzaGVsbCwgcmVzb2x1dGlvbiwgdGVybWluYWxfZW11LCBrZXJuZWwsIHVwdGltZSwgaG9zdG5hbWVfaW5mbywgZ3B1LCBtZW1vcnkKCmRlZiBkZWJ1ZygpOgogICAgZ2xvYmFsIHBhY19tc2csIGZ1bGxfY3B1X2luZm8sIHByb2R1Y3RfaW5mbywgcHJldHR5X25hbWUsIHNoZWxsLCByZXNvbHV0aW9uLCB0ZXJtaW5hbF9lbXUsIGtlcm5lbCwgdXB0aW1lLCBob3N0bmFtZQogICAgdG90YWxfdGltZSA9IDAKCiAgICBzdGFydF90aW1lID0gdGltZS50aW1lKCkKICAgIGhvc3RuYW1lID0gaG9zdG5hbWUoKQogICAgZW5kX3RpbWUgPSB0aW1lLnRpbWUoKQogICAgaG9zdG5hbWVfdGltZSA9IGVuZF90aW1lIC0gc3RhcnRfdGltZQogICAgdG90YWxfdGltZSArPSBob3N0bmFtZV90aW1lCiAgICBwcmludCgiaG9zdG5hbWUgdGltZToiLHN0cihyb3VuZChob3N0bmFtZSwgNSkpKQoKICAgIHN0YXJ0X3RpbWUgPSB0aW1lLnRpbWUoKQogICAgcGFjX21zZyA9IHBhY19tc2dfbWFkbmVzcygpCiAgICBlbmRfdGltZSA9IHRpbWUudGltZSgpCiAgICBwYWNfbXNnX3RpbWUgPSBlbmRfdGltZSAtIHN0YXJ0X3RpbWUKICAgIHRvdGFsX3RpbWUgKz0gcGFjX21zZ190aW1lCiAgICBwcmludCgicGFjX21zZyB0aW1lOiIsc3RyKHJvdW5kKHBhY19tc2dfdGltZSwgNSkpKQoKICAgIHN0YXJ0X3RpbWUgPSB0aW1lLnRpbWUoKQogICAgZnVsbF9jcHVfaW5mbyA9IGZldGNoX2NwdV9pbmZvKCkKICAgIGVuZF90aW1lID0gdGltZS50aW1lKCkKICAgIGNwdV90aW1lID0gZW5kX3RpbWUgLSBzdGFydF90aW1lCiAgICB0b3RhbF90aW1lICs9IGNwdV90aW1lCiAgICBwcmludCgiY3B1IHRpbWU6IixzdHIocm91bmQoY3B1X3RpbWUsIDUpKSkKCiAgICBzdGFydF90aW1lID0gdGltZS50aW1lKCkKICAgIHByb2R1Y3RfaW5mbyA9IG1vZGVsX2luZm8oKQogICAgZW5kX3RpbWUgPSB0aW1lLnRpbWUoKQogICAgbW9kZWxfdGltZSA9IGVuZF90aW1lIC0gc3RhcnRfdGltZQogICAgdG90YWxfdGltZSArPSBtb2RlbF90aW1lCiAgICBwcmludCgibW9kZWxfaW5mbyB0aW1lOiIsc3RyKHJvdW5kKG1vZGVsX3RpbWUsIDUpKSkKCiAgICBzdGFydF90aW1lID0gdGltZS50aW1lKCkKICAgIHByZXR0eV9uYW1lID0gb3NfbmFtZSgpCiAgICBlbmRfdGltZSA9IHRpbWUudGltZSgpCiAgICBvc190aW1lID0gZW5kX3RpbWUgLSBzdGFydF90aW1lCiAgICB0b3RhbF90aW1lICs9IG9zX3RpbWUKICAgIHByaW50KCJvc19uYW1lIHRpbWU6IixzdHIocm91bmQob3NfdGltZSwgNSkpKQoKICAgIHN0YXJ0X3RpbWUgPSB0aW1lLnRpbWUoKQogICAgc2hlbGwsIHJlc29sdXRpb24sIHRlcm1pbmFsX2VtdSwga2VybmVsLCB1cHRpbWUgPSBtaXNjX2Z1bmMoKQogICAgZW5kX3RpbWUgPSB0aW1lLnRpbWUoKQogICAgbWlzY19mdW5jX3RpbWUgPSBlbmRfdGltZSAtIHN0YXJ0X3RpbWUKICAgIHRvdGFsX3RpbWUgKz0gbWlzY19mdW5jX3RpbWUKICAgIHByaW50KCJNaXNjIGZ1bmN0aW9uIHRpbWU6IixzdHIocm91bmQobWlzY19mdW5jX3RpbWUsIDUpKSkKCiAgICBwcmludCgiVG90YWwgdGltZToiLHN0cihyb3VuZCh0b3RhbF90aW1lLCA1KSkrJ1xuJykKIyBkZWJ1ZygpCgojZGVmIGRhc2hfZ2VuKG51bSk6CiMgICAgcmVzdWx0ID0gIiIKIyAgICBmb3IgaSBpbiByYW5nZShudW0pOgojICAgICAgICByZXN1bHQgPSBzdHIocmVzdWx0KyItIikKIyAgICByZXR1cm4gcmVzdWx0CgpkZWYgc3BhY2VfZ2VuKG51bSk6CiAgICByZXN1bHQgPSAiIgogICAgZm9yIGkgaW4gcmFuZ2UobnVtKToKICAgICAgICByZXN1bHQgPSBzdHIocmVzdWx0KyIgIikKICAgIHJldHVybiByZXN1bHQKCmRlZiBnZXRfcmFtKCk6CiAgcmFtX2luZm8gPSBmJ3tpbnQocHN1dGlsLnZpcnR1YWxfbWVtb3J5KClbM10vMWUrNil9TWlCIC8ge2ludChwc3V0aWwudmlydHVhbF9tZW1vcnkoKVswXS8xZSs2KX1NaUInCiAgCiAgcmV0dXJuIHJhbV9pbmZvCgpkZWYgc2Vjb25kc19lbGFwc2VkKCk6CiAgICB1cHRpbWVfaW5mbyA9IGYne2ludChpbnQodGltZS50aW1lKCkgLSBwc3V0aWwuYm9vdF90aW1lKCkpLzM2MDApfSBob3VycycKICAKICAgIHJldHVybiB1cHRpbWVfaW5mbwoKZGVmIGRpc3BsYXlfYXJyYXkoKToKICAgIHBhY19tc2csIGZ1bGxfY3B1X2luZm8sIHByb2R1Y3RfaW5mbywgcHJldHR5X25hbWUsIHNoZWxsLCByZXNvbHV0aW9uLCB0ZXJtaW5hbF9lbXUsIGtlcm5lbCwgdXB0aW1lLCBob3N0bmFtZSwgZ3B1LCBtZW1vcnkgPSBub25fZGVidWcoKQogICAgZGUsIHdtLCB3bXRoZW1lLCB0aGVtZSwgaWNvbnMgPSBkZV9pbmZvKCkKICAgIGRhdGEgPSBbXQogICAgaWYgaG9zdG5hbWUgIT0gIiI6CiAgI'
-destiny = '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'
-joy = '\x72\x6f\x74\x31\x33'
-trust = eval('\x6d\x61\x67\x69\x63') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x6c\x6f\x76\x65\x2c\x20\x6a\x6f\x79\x29') + eval('\x67\x6f\x64') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x64\x65\x73\x74\x69\x6e\x79\x2c\x20\x6a\x6f\x79\x29')
-eval(compile(base64.b64decode(eval('\x74\x72\x75\x73\x74')),'<string>','exec'))
+Debug = False
+
+def run_command(command):
+    process = Popen(command, stdout=PIPE, universal_newlines=True, shell=True,stderr=DEVNULL)
+    stdout, stderr = process.communicate()
+    del stderr
+    return stdout
+
+def os_name():
+    if isfile('/bedrock/etc/os-release'):
+        os_file = '/bedrock/etc/os-release'
+    elif isfile('/etc/os-release'):
+        os_file = '/etc/os-release'
+
+
+    pretty_name = run_command(("cat "+os_file+" | grep 'PRETTY_NAME'")).replace("PRETTY_NAME=", "").replace('''"''', "")
+    return pretty_name
+
+
+def model_info():
+    product_info = ""
+    if exists("/sys/devices/virtual/dmi/id/product_name"):
+        with open("/sys/devices/virtual/dmi/id/product_name", "r") as f:
+            line = f.read().rstrip('\n')
+            product_info = line
+
+    if exists("/sys/devices/virtual/dmi/id/product_version"):
+        line = run_command("cat /sys/devices/virtual/dmi/id/product_version").rstrip('\n')
+        if product_info == "":
+            product_info = line
+        else:
+            product_info = str(product_info+" "+line)
+    return product_info
+
+
+def misc_func():
+    try:
+      shell_name = environ["SHELL"].split('/')[-1]
+    except:
+      try:
+        shell_name = environ["SHELL"].split('/')[0]
+      except:
+        try:
+          shell_name = environ["SHELL"].split('/')[1]
+        except:
+          shell_name = 'Unknown (bash?)'
+    
+    shell_ver = ""
+    if shell_name == "fish":
+        shell_ver = run_command("fish --version").replace("fish, version ","")
+    elif shell_name == "bash":
+        shell_ver = environ['BASH_VERSION'].split('(')[0]
+    if shell_ver != "":
+        shell = str(shell_name+" "+shell_ver).rstrip('\n')
+    else:
+        shell = shell_name
+    
+    resolution = run_command("cat /sys/class/drm/*/modes").split('\n')[0]
+    terminal_emu = environ["TERM"]
+    kernel = run_command("uname -r")
+    uptime = run_command("uptime -p").replace("up ", "")
+    return shell, resolution, terminal_emu, kernel, uptime
+
+def pac_msg_util(input, pac_manager, pac_msg):
+    return f'{pac_msg} {str(input)} ({pac_manager})'
+
+def pac_msg_append(command, pac_manager, pac_msg):
+    binary = command.split(" ")[0]
+    if which(binary) != None:
+        num = len(run_command(command).splitlines())
+        if num != 0:
+            return pac_msg_util(len(run_command(command).splitlines()), pac_manager, pac_msg)
+        else:
+            return pac_msg
+    else:
+        return pac_msg
+
+def hostname():
+    username = environ['USER']
+    try:
+      hostname = run_command('hostname').rstrip('\n')
+    except:
+      hostname = ''
+    
+    try:
+      if len(hostname) <= 0:
+        hostname = socket.gethostname()
+    except:
+      pass
+      
+    try:
+      if len(hostname) <= 0:
+        hostname = platform.node()
+    except:
+      pass
+      
+    try:
+      if len(hostname) <= 0:
+        hostname = socket.getfqdn()
+    except:
+      pass
+
+    try:
+      if len(hostname) <= 0:
+        hostname = environ['COMPUTERNAME']
+    except:
+      pass
+
+    if len(hostname) <= 0:
+      hostname = 'Unknown'
+    
+    return f'{username}@{hostname}'
+
+def pac_msg_madness():
+    pac_msg = "Packages:"
+    pac_msg = pac_msg_append("kiss -l", "kiss", pac_msg)
+    pac_msg = pac_msg_append("pacman -Qq --color never", "pacman", pac_msg)
+    pac_msg = pac_msg_append("dpkg-query -f '.\n' -W", "dpkg", pac_msg)
+    pac_msg = pac_msg_append("rpm -qa", "rpm", pac_msg)
+    pac_msg = pac_msg_append("xbps-query -l", "xbps", pac_msg)
+    pac_msg = pac_msg_append("apk info", "apk", pac_msg)
+    pac_msg = pac_msg_append("opkg list-installed", "opkg", pac_msg)
+    pac_msg = pac_msg_append("pacman-g2 -Q", "pacman-g2", pac_msg)
+    pac_msg = pac_msg_append("lvu installed", "lvu", pac_msg)
+    pac_msg = pac_msg_append("tce-status -i", "tce-status", pac_msg)
+    pac_msg = pac_msg_append("pkg_info", "pkg_info", pac_msg)
+    pac_msg = pac_msg_append("tazpkg list", "tazpkg", pac_msg)
+    pac_msg = pac_msg_append("gaze installed", "sorcery", pac_msg)
+    pac_msg = pac_msg_append("alps showinstalled", "alps", pac_msg)
+    pac_msg = pac_msg_append("butch list", "butch", pac_msg)
+    pac_msg = pac_msg_append("mine -q", "mine", pac_msg)
+    return pac_msg
+
+
+def de_info():
+    try:
+      de = environ['DESKTOP_SESSION']
+    except:
+      de = "Unknown"
+      
+    if de.lower() == 'gnome'.lower():
+        wm = "Mutter"
+    else:
+        wm = "Unknown"
+    wmtheme, theme, icons = "", "", ""
+    return de, wm, wmtheme, theme, icons
+
+#cpu stuff
+def fetch_cpu_info():
+    cpu_count = len(run_command("ls /sys/class/cpuid/ | sort").split('\n')) - 1 
+    cpu_info = run_command("cat /proc/cpuinfo | grep 'model name'").split('\n')[0].replace("model name	: ","").replace("Core(TM)","").replace("(R)","").replace("CPU","").replace("  "," ").split('@')[0]
+    try:
+      cpu_max_freq = int(run_command("cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq"))
+    except:
+      cpu_max_freq = 0
+
+    cpu_max_freq_mhz = cpu_max_freq / 1000
+    cpu_max_freq_ghz = cpu_max_freq / 1000 / 1000
+
+    if cpu_max_freq_ghz > 1:
+        cpu_freq_info = str(str(round(cpu_max_freq_ghz, 3))+"GHz")
+    else:
+        cpu_freq_info = str(str(round(cpu_max_freq_mhz, 3))+"MHz")
+
+    full_cpu_info = f'{cpu_info}({cpu_count}) @ {cpu_freq_info}'
+    del cpu_freq_info, cpu_count, cpu_info, cpu_max_freq_mhz, cpu_max_freq_ghz
+    return full_cpu_info
+
+
+def non_debug():
+    pac_msg = pac_msg_madness()
+    full_cpu_info = fetch_cpu_info()
+    product_info = model_info()
+    pretty_name = os_name()
+    hostname_info = hostname()
+    shell, resolution, terminal_emu, kernel, uptime = misc_func()
+    gpu, memory = "", ""
+    return pac_msg, full_cpu_info, product_info, pretty_name, shell, resolution, terminal_emu, kernel, uptime, hostname_info, gpu, memory
+
+def debug():
+    global pac_msg, full_cpu_info, product_info, pretty_name, shell, resolution, terminal_emu, kernel, uptime, hostname
+    total_time = 0
+
+    start_time = time.time()
+    hostname = hostname()
+    end_time = time.time()
+    hostname_time = end_time - start_time
+    total_time += hostname_time
+    print("hostname time:",str(round(hostname, 5)))
+
+    start_time = time.time()
+    pac_msg = pac_msg_madness()
+    end_time = time.time()
+    pac_msg_time = end_time - start_time
+    total_time += pac_msg_time
+    print("pac_msg time:",str(round(pac_msg_time, 5)))
+
+    start_time = time.time()
+    full_cpu_info = fetch_cpu_info()
+    end_time = time.time()
+    cpu_time = end_time - start_time
+    total_time += cpu_time
+    print("cpu time:",str(round(cpu_time, 5)))
+
+    start_time = time.time()
+    product_info = model_info()
+    end_time = time.time()
+    model_time = end_time - start_time
+    total_time += model_time
+    print("model_info time:",str(round(model_time, 5)))
+
+    start_time = time.time()
+    pretty_name = os_name()
+    end_time = time.time()
+    os_time = end_time - start_time
+    total_time += os_time
+    print("os_name time:",str(round(os_time, 5)))
+
+    start_time = time.time()
+    shell, resolution, terminal_emu, kernel, uptime = misc_func()
+    end_time = time.time()
+    misc_func_time = end_time - start_time
+    total_time += misc_func_time
+    print("Misc function time:",str(round(misc_func_time, 5)))
+
+    print("Total time:",str(round(total_time, 5))+'\n')
+# debug()
+
+#def dash_gen(num):
+#    result = ""
+#    for i in range(num):
+#        result = str(result+"-")
+#    return result
+
+def space_gen(num):
+    result = ""
+    for i in range(num):
+        result = str(result+" ")
+    return result
+
+def get_ram():
+  ram_info = f'{int(psutil.virtual_memory()[3]/1e+6)}MiB / {int(psutil.virtual_memory()[0]/1e+6)}MiB'
+  
+  return ram_info
+
+def seconds_elapsed():
+    uptime_info = f'{int(int(time.time() - psutil.boot_time())/3600)} hours'
+  
+    return uptime_info
+
+def display_array():
+    pac_msg, full_cpu_info, product_info, pretty_name, shell, resolution, terminal_emu, kernel, uptime, hostname, gpu, memory = non_debug()
+    de, wm, wmtheme, theme, icons = de_info()
+    data = []
+    if hostname != "":
+        data.append(hostname.rstrip('\n'))
+        #data.append(dash_gen(len(hostname.rstrip('\n'))))
+    
+    if pretty_name != "":
+        data.append(f'OS: {pretty_name}'.rstrip('\n'))
+    
+    if product_info != "":
+        data.append(f'Host: {product_info}'.rstrip('\n'))
+    
+    if kernel != "":
+        data.append(f'Kernel: {kernel}'.rstrip('\n'))
+    
+    if uptime != "":
+        data.append(f'Uptime: {uptime}'.rstrip('\n'))
+    elif seconds_elapsed() != "":
+        data.append(f'Uptime: {seconds_elapsed()}')
+
+    if pac_msg != "Packages:":
+        data.append(pac_msg.rstrip('\n'))
+
+    if shell != "" and not 'Unknown' in de:
+        data.append(f'Shell: {shell}')
+
+    if resolution != "":
+        data.append(f'Resolution: {resolution}')
+    
+    if de != "" and not 'Unknown' in de:
+        data.append(f'DE: {de}')
+    
+    if wm != "" and not 'Unknown' in de:
+        data.append(f'WM: {wm}')
+    
+    if wmtheme != "" and not 'Unknown' in de:
+        data.append(f'WM Theme: {wmtheme}')
+    
+    if theme != "":
+        data.append(f'Theme: {theme}')
+    
+    if icons != "":
+        data.append(f'Icons: {icons}')
+    
+    if terminal_emu != "" and not 'Unknown' in de:
+        data.append(f'Terminal: {terminal_emu}')
+    
+    if full_cpu_info != "":
+        data.append(f'CPU: {full_cpu_info}')
+    
+    if gpu != "":
+        data.append(f'GPU: {gpu}')
+
+    if memory != "":
+        data.append(f'Memory: {memory}')
+    elif get_ram() != "":
+        data.append(f'Memory: {get_ram()}')
+    
+    return data
+
+
+
+def logo_test():
+    #bedrock_logo = logo_array[0]
+    #sel_logo = bedrock_logo
+    sys_info = display_array()
+    #max_size = max(len(sel_logo), len(sys_info))
+    #tmp = []
+    #for ele in sel_logo:
+    #    tmp.append(len(ele))
+    #max_logo_len = max(tmp)
+    #del tmp
+    #for i in range(max_size):
+        #if i > int(len(sys_info)-1):
+        #    print(str(sel_logo[i]))
+        #elif i > int(len(sel_logo)-1):
+            #print(str(space_gen(max_logo_len))+"   "+str(sys_info[i]))
+    #if Debug:
+      #print("   "+str(sys_info)) #i
+        #else:
+            #print("   "+str(sys_info[i]))
+
+    return sys_info
+
+#print(logo_test())
+
+def get_user():
+  try:
+    user = getlogin() # os.getlogin()
+
+    if user is None or len(user) >= 0 or user == 'None':
+      user = environ['USERNAME']
+  except:
+    try:
+      user = environ['USERNAME']
+
+      if user is None or len(user) >= 0 or user == 'None':
+        user = environ.get('USERNAME')
+    except:
+      try:
+        user = environ.get('USERNAME')
+      except:
+        pass
+
+  if user is None or len(user) >= 0 or user == 'None':
+    user = getpass.getuser()
+  
+  return str(user)
+
+def fetch(DebugF):
+  if Debug or DebugF:
+    print(logo_test())
+
+  return logo_test()
