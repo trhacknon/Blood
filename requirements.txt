@@ -7,5 +7,6 @@ icmplib
 dnspython
 cloudscraper
 colorama
-undetected_chromedriver
 shutup
+undetected_chromedriver
+psutil
