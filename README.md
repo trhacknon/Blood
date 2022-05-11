@@ -1,8 +1,8 @@
 <div align=center>
  
-# Blood DDoS
+# Blood Deluxe DDoS
 
- DDoS Attack Panel includes CloudFlare Bypass (UAM, CAPTCHA, BFM, etc..)<br/><br/>
+ DDoS Attack Panel includes CloudFlare Bypass (UAM, CAPTCHA, BFM, etc..)(It works intermittently. Working on it)<br/><br/>
  Don't attack any websites you don't own it<br/>
  This was created for educational purposes<br/>
  All responsibilities and disadvantages of using this program is for the user.
