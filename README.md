@@ -125,3 +125,9 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
  or @jc_lifemiles (please,no)
 ```
 
+## record
+```sh
+10 hours of ddos.... This guy's crazy.
+![image](https://user-images.githubusercontent.com/96767456/168154684-dd523706-9125-4093-8600-1c7ab1c02ce2.png)
+
+```
