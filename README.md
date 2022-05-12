@@ -128,6 +128,7 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 ## record
 ```sh
 10 hours of ddos.... This guy's crazy.
+
 ![image](https://user-images.githubusercontent.com/96767456/168154819-fb0c871f-6286-4008-8dec-1bf86fea8051.png)
 
 
