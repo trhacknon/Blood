@@ -6,6 +6,9 @@
  Don't attack any websites you don't own it<br/>
  This was created for educational purposes<br/>
  All responsibilities and disadvantages of using this program is for the user.
+
+!!!!!!The author is not responsible for the actions of users who use this script!!!!!!
+!!!!!!Автор не несёт ответственности за действия пользователей, который используют этот скрипт.!!!!!!
  
  To help the author: ltc1qgrj22jysxmvkv2guv0pcn8ea4kvdwmpdcu4w87  | LTC
 
