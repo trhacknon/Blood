@@ -10,3 +10,5 @@ colorama
 shutup
 undetected_chromedriver
 psutil
+flask
+winreg

@@ -14,6 +14,8 @@ if c == "0":
     os.system("pip install undetected_chromedriver")
     os.system("pip install shutup")
     os.system("pip install psutil")
+    os.system("pip install flask")
+    os.system("pip install winreg")
 elif c == "1":
     os.system("pip3 install cloudscraper")
     os.system("pip3 install socks")
@@ -27,7 +29,8 @@ elif c == "1":
     os.system("pip3 install httpx")
     os.system("pip3 install shutup")
     os.system("pip3 install psutil")
-
+    os.system("pip3 install flask")
+    os.system("pip3 install winreg")
 if os.name == "nt":
     pass
 else:
