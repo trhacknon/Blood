@@ -73,6 +73,7 @@ RUS:
  - dns     | Classic DNS Lookup
  - geoip   | Geo IP Address Lookup
  - Subnet  | Subnet IP Address Lookup
+ Also u can take proxy from https://checkerproxy.net/getAllProxy (push on your data)
 
 ```
 
