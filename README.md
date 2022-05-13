@@ -21,6 +21,22 @@
 ![image](https://user-images.githubusercontent.com/96767456/167305588-8049db11-64d1-43e2-908e-ac05724a0e3b.png)
 
 
+## RULES
+
+```sh
+ENG:
+1. Don't attack any websites you don't own it!
+2. Do not use the script with the intention of hurting someone!
+3. The script was created for educational purposes and to test the security of the site in critical situations for SYSTEM ADMINISTRATORS!
+I AM NOT RESPONSIBLE FOR YOUR ACTIONS!
+=====
+RUS:
+1. Не атакуйте сайты, которые вам не принадлежат!
+2. Не используйте скрипт с намерением навредить кому-либо!
+3. Скрипт был создан в образовательных целях и для тестирования сайта на безопасность(бесперебойную работу в критических ситуациях) ДЛЯ СИСТЕМНЫХ АДМИНИСТРАТОРОВ!
+Я НЕ НЕСУ ОТВЕСТВЕННОСТИ ЗА ВАШИ ДЕЙСТВИЯ!
+```
+
 
 ## Methods
 
@@ -43,7 +59,6 @@
 - hulk     | Hulk DoS tool
 - pxraw    | Proxy Request Attack
 - pxslow   | Proxy Slowloris attack
-- attackru | Attack Russians gov sites + Banks(soon)   WORK ONLY WINDOWS!!!
  
   [Layer 4]
   -udp     | UDP Attack
@@ -125,14 +140,5 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 ## Contact Developer
 ```sh
  Telegram: @AuraNetz
- or @jc_lifemiles (please,no)
 ```
 
-## record
-```sh
-10 hours of ddos.... This guy's crazy.
-
-![image](https://user-images.githubusercontent.com/96767456/168154819-fb0c871f-6286-4008-8dec-1bf86fea8051.png)
-
-
-```
