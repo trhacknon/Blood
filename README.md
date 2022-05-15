@@ -45,13 +45,13 @@ RUS:
  - cfb     | Bypass CF attack
  - pxcfb   | Bypass CF attack with proxy
  - cfpro   | Bypass CF UAM, CAPTCHA, BFM, etc,, with request
- - cfsoc   | Bypass CF UAM, CAPTCHA, BFM, etc,, with socket
+ - cfsoc   | Bypass CF UAM, CAPTCHA, BFM, etc,, with socket(Temporarily not working)
  - pxsky   | Bypass Google Project Shield, Vshield, DDoS Guard Free, CF NoSec With Proxy
  - sky     | Sky method without proxy
  - get     | Get  Request Attack
  - post    | Post Request Attack
  - head    | Head Request Attack
- - soc     | Socket Attack
+ - soc     | Socket Attack(Temporarily not working)
  - pxraw   | Proxy Request Attack
  - pxsoc   | Proxy Socket Attack
  -bypass   | Bypass Google Project Shield, Vshield
