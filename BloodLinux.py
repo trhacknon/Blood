@@ -378,7 +378,7 @@ def steal_proxies(site):
         data = requests.get(site)
         text_for_parse = data.text
         res = text_for_parse.split()
-        with open('proxy.txt', 'a') as proxy_file:
+        with open('proxy.txt', 'a', encoding='utf8', errors='ignore') as proxy_file:
             proxy_file.writelines('\n'.join(res))
         return True
     except Exception as Error:
