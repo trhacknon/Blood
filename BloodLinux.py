@@ -255,7 +255,7 @@ def get_proxies():
     if not os.path.exists("./proxy.txt"):
         stdout.write(Fore.MAGENTA + " [*]" + Fore.WHITE + " You Need Proxy File ( ./proxy.txt )\n")
         return False
-    proxies = open("./proxy.txt", 'r').read().split('\n')
+    proxies = open("./proxy.txt", 'r', encoding='utf8', errors='ignore').read().split('\n')
     return True
 
 ip = r.post("http://fsystem88.ru/ip").text #thank u fsystem))
