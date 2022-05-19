@@ -8,7 +8,7 @@
  All responsibilities and disadvantages of using this program is for the user.<br/>
 
 !!!!!!The author is not responsible for the actions of users who use this script!!!!!!<br/><br/>
-!!!!!!Автор не несёт ответственности за действия пользователей, который используют этот скрипт.!!!!!!<br/>
+!!!!!!Автор не несёт ответственности за действия пользователей, которые используют этот скрипт.!!!!!!<br/>
  
  To help the author: ltc1qgrj22jysxmvkv2guv0pcn8ea4kvdwmpdcu4w87  | LTC<br/>
 
