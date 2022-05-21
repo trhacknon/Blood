@@ -93,6 +93,7 @@ Install Chrome (or update it lastest version)
 OR
  - python3 setup.py
 
+ - python3 BloodLinux.py
 ```
 ## Usage on Windows
 ```sh
