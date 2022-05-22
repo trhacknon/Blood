@@ -144,3 +144,14 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
  Telegram: @AuraNetz
 ```
 
+
+## My messages
+```sh
+ - Man(@hserv1ce), Blood it's not paste :(
+ - I will remove the CF methods soon. A new BOMB will be added.
+l7
+![image](https://user-images.githubusercontent.com/96767456/169708984-6764e0f4-f22d-4e36-822e-456be2afb97a.png)
+l4
+![image](https://user-images.githubusercontent.com/96767456/169709002-0a4a0376-00dd-47f7-8d41-ff8beba7b57f.png)
+
+```
