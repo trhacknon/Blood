@@ -146,13 +146,13 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 
 
 ## My messages
-```sh
- - Man(@hserv1ce), Blood it's not paste ((
- - I will remove the CF methods soon. A new BOMB will be added.
-l7
-![image](https://user-images.githubusercontent.com/96767456/169709057-37143049-b799-4a37-83bc-77d2b62097a5.png)
-l4
-![image](https://user-images.githubusercontent.com/96767456/169709042-075b9605-a66e-4fac-891d-5ac6b56c556c.png)
+
+ - Man(@hserv1ce), Blood it's not paste </br>
+ - I will remove the CF methods soon. A new BOMB will be added.</br>
+l7</br>
+![image](https://user-images.githubusercontent.com/96767456/169709099-1c1519e7-a998-4d9d-8cb7-74e5ec35230f.png)</br>
+l4</br>
+![image](https://user-images.githubusercontent.com/96767456/169709120-5afdba47-6aa1-41aa-82d9-a6e5ecb439d8.png)
 
 
-```
+
