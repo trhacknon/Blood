@@ -65,7 +65,8 @@ RUS:
   -tcp     | TCP Attack
   -mine    | Minecraft Dos attack 
   -vse     | Send Valve Source Engine Protocol
-  
+  -tcpc    | TCP Custom attack(using: tcpcustom. Need ip, port. To use on L7 servers port: 80)
+
   [Tools]
 
  - .proxy  | Get VALID proxies into proxy.txt 
