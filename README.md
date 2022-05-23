@@ -43,10 +43,13 @@ RUS:
 
 ```sh
   [Layer 7]
+===
+To be deleted or replaced
  - cfb     | Bypass CF attack
  - pxcfb   | Bypass CF attack with proxy
  - cfpro   | Bypass CF UAM, CAPTCHA, BFM, etc,, with request
  - cfsoc   | Bypass CF UAM, CAPTCHA, BFM, etc,, with socket(Temporarily not working)
+===
  - pxsky   | Bypass Google Project Shield, Vshield, DDoS Guard Free, CF NoSec With Proxy
  - sky     | Sky method without proxy
  - get     | Get  Request Attack
