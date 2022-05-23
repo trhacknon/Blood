@@ -11,7 +11,8 @@
 !!!!!!Автор не несёт ответственности за действия пользователей, которые используют этот скрипт.!!!!!!<br/>
  
  To help the author: ltc1qgrj22jysxmvkv2guv0pcn8ea4kvdwmpdcu4w87  | LTC<br/>
-
+</br>
+Or https://boosty.to/lifemiles
 ## Language</br>
 
  <img src="https://img.shields.io/badge/Python-FFDD00?style=for-the-badge&logo=python&logoColor=blue"/></br>
