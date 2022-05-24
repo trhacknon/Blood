@@ -147,6 +147,7 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 ## Contact Developer
 ```sh
  Telegram: @AuraNetz
+ @jc_lifemiles or @jc_lifemiles2
 ```
 
 
