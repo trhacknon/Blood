@@ -153,5 +153,16 @@ Use command line : python3 blood.py <method> <target> <thread> <time>
 ## My messages
 
 
+```sh
+SPRECIALY FOR ISSUE6:
+TCP.EXE SOURCE CODE ON GITHUB:
+https://github.com/iLaravel/TCPCustom
+
+Okay?Normal? Thanks for the criticism, which no one wants 
+
+
+```
+
+
 
 
