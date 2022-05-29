@@ -87,7 +87,7 @@ To be deleted or replaced
 ```sh
 You must use Python 3.9 or higher
 
-git clone https://github.com/firstapostle/Blood.git
+git clone https://github.com/trhacknon/Blood.git
 
 Install Python3 modules
  - pip3 install -r requirements.txt  or  pip install -r requirements.txt
@@ -105,7 +105,7 @@ OR
 Install python - https://www.python.org
 Install Git - https://gitforwindows.org (instruction in telegram-channel. contact @AuraNetz or @CyberEducational or @MiraiLove )
 
-git clone https://github.com/firstapostle/Blood
+git clone https://github.com/trhacknon/Blood
 cd Blood
 python3 setup.py / py setup.py
 Нажимаем 1
@@ -126,7 +126,7 @@ pkg install wget
 pkg install rust
 pip install supertools wheel
 pip install shutup
-git clone https://github.com/firstapostle/Blood
+git clone https://github.com/trhacknon/Blood
 cd Blood
 export CARGO_BUILD_TARGET=aarch64-linux-android && python3 -m pip install cryptography
 export CARGO_BUILD_TARGET==aarch64-linux-android && python3 -m pip install -r requirements.txt
